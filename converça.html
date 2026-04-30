@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>conversa</title>
+</head>
+<style>
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-family: Arial, sans-serif;
+        background-image: url(https://i.pinimg.com/236x/7c/29/29/7c2929ff41f2406df117969a5bf46bf7.jpg);
+
+    }
+    .ui {
+        text-align: center;
+        background-image: url('https://bbinforj.com.br/wp-content/uploads/2021/08/WhatsApp-Background.jpg');
+        padding: 30px;
+        width: 1000px;
+        border-radius: 12px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        color: aliceblue;
+    }
+    .box {
+        display: inline;
+        margin-top: 20px;
+        background-color: #fff;
+        padding: 20px;
+        width: 700px;
+        height: 700px auto;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .mensagemProfessor {
+       margin-top: 5px;
+       width: 550px;
+       background-color: #f0f0f0;
+       padding: 10px;
+       border-radius: 10px;
+    }
+    .mensagemAluno {
+        margin-top: 5px;
+        width: 550px;
+        margin-left: auto;
+        background-color: #d0e6ff;
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    .mensagemAluno2 {
+        margin-top: 5px;
+        width: 550px;
+        margin-left: auto;
+        background-color: #d0e6ff;
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    .mensagemAluno3 {
+        margin-top: 5px;
+        width: 550px;
+        margin-left: auto;
+        background-color: #d0e6ff;
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    .escolher {
+        padding: 5px 10px;
+        font-size: 16px;
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .escolher:hover {
+
+        background-color: #0056b3;
+    }
+
+</style>
+<body>
+    <!-- Interface do usuário -->
+    <!-- === -->
+    <div class="ui">
+    <img src="https://lh3.googleusercontent.com/a-/ALV-UjX-sCwEuj3w9FAN3LvfkMlYx-NLWhd2VTBhRKY49OJBAZvJhRM=s75-c" alt="" style="border-radius: 80px; width: 130px; height: 130px;">
+    <h1>Professor Raul</h1>
+    <p>Professor de IT, o maior especialista de IT de todos os temp...
+    </div>
+
+     <!-- Conteúdo da conversa -->
+     <!-- === -->
+    <div class="box">
+
+        <!-- mensagem do professor -->
+         <!-- === -->
+        <div class="mensagemProfessor">
+        <img src="https://lh3.googleusercontent.com/a-/ALV-UjX-sCwEuj3w9FAN3LvfkMlYx-NLWhd2VTBhRKY49OJBAZvJhRM=s75-c" alt="" style="border-radius: 50%; width: 50px; height: 50px;">
+            <p><strong>Raul:</strong> Olá, professor Raul! Como vai?</p>
+        </div>
+        <!-- mensagem do aluno -->
+         <!-- === -->
+        <div class="mensagemAluno">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1_oTUJ4md6iqBL92ultXfwwtpe-fKdYClug&s" alt="" style="border-radius: 50%; width: 50px; height: 50px;">
+            <p><strong>Você:</strong> <br> <button class="escolher" onclick="positivo()">eu estou bem, obrigado!</button> <button class="escolher" onclick="negativo()">Não muito, vem acontecendo muitas coisas...</button></p>
+        </div>
+
+        <div class="mensagemProfessor2">
+
+        </div>
+
+
+    </div>
+   <script>
+    function criarMensagem(tipo, textoHTML) {
+    const mensagem = document.createElement('div');
+    mensagem.className = tipo;
+
+    mensagem.innerHTML = `
+        <img src="${tipo === 'mensagemAluno' || tipo === 'mensagemAluno2' || tipo === 'mensagemAluno3'
+            ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1_oTUJ4md6iqBL92ultXfwwtpe-fKdYClug&s'
+            : 'https://lh3.googleusercontent.com/a-/ALV-UjX-sCwEuj3w9FAN3LvfkMlYx-NLWhd2VTBhRKY49OJBAZvJhRM=s75-c'}"
+        style="border-radius:50%; width:50px; height:50px;">
+        <p>${textoHTML}</p>
+    `;
+
+    document.querySelector('.box').appendChild(mensagem);
+}
+
+
+    function positivo() {
+    document.querySelector('.mensagemAluno').remove();    
+
+    criarMensagem('mensagemAluno', '<strong>Você:</strong> eu estou bem, obrigado!');
+
+    criarMensagem('mensagemProfessor', '<strong>Raul:</strong> Que bom ouvir isso! Mas você fez as atividades?');
+
+    // remove opções antigas
+
+
+    // cria nova pergunta com botões
+    criarMensagem('mensagemAluno2', `
+        <strong>Você:</strong><br>
+        <button onclick="mentir()" class="escolher">É que bem... Eu fiz!</button>
+        <button onclick="verdade()" class="escolher">Eu esqueci...</button>
+    `);
+}
+// ================================================================================================================================================
+
+function mentir() {
+    document.querySelector('.mensagemAluno2').remove(); 
+
+    criarMensagem('mensagemAluno', '<strong>Você:</strong> É que bem... Eu fiz! mas... acho que os sistema não registrou...');
+
+    criarMensagem('mensagemProfessor', '<strong>Raul:</strong> Serio!? seria bom verificar agora mesmo, para evitar problemas depois. Quando você enviou a ativida?');
+
+    // remove opções antigas
+
+
+    criarMensagem('mensagemAluno3', `
+        <strong>Você:</strong><br>
+        <button onclick="mentir2()" class="escolher">Bem... foi pertinho de ontem!</button>
+        <button onclick="verdade2()" class="escolher">Eu...Eu na verdade esqueci de mandar...</button>
+    `);
+}
+// ==================================================================================================================
+function verdade() {
+    document.querySelector('.mensagemAluno2').remove(); 
+
+    criarMensagem('mensagemAluno', '<strong>Você:</strong>Eu esqueci...Desculpa professor, é que eu estava com muitas coisas para fazer e acabei esquecendo...');
+
+    criarMensagem('mensagemProfessor', '<strong>Raul:</strong> Sem problemas, acontece com todo mundo. Mas é importante tentar se organizar para não esquecer das coisas, ok?');
+
+    // remove opções antigas
+
+
+    criarMensagem('mensagemAluno3', `
+        <strong>Você:</strong><br>
+        Beleza, professor! Eu vou me organizar melhor para não esquecer mais. Obrigado pela compreensão! <br>
+        
+    `);
+}
+// =================================================================================================================
+     function negativo() {
+    // 1. Criar a mensagem do aluno (como se tivesse sido enviada)
+    const mensagemAluno = document.createElement('div');
+    mensagemAluno.className = 'mensagemAluno';
+
+    mensagemAluno.innerHTML = `
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1_oTUJ4md6iqBL92ultXfwwtpe-fKdYClug&s"
+        style="border-radius:50%; width:50px; height:50px;">
+        <p><strong>Você:</strong> Não muito, vem acontecendo muitas coisas...</p>
+    `;
+
+    document.querySelector('.box').appendChild(mensagemAluno);
+
+    // 2. Criar resposta do professor
+    const mensagemProfessor = document.createElement('div');
+    mensagemProfessor.className = 'mensagemProfessor';
+
+    mensagemProfessor.innerHTML = `
+        <img src="https://lh3.googleusercontent.com/a-/ALV-UjX-sCwEuj3w9FAN3LvfkMlYx-NLWhd2VTBhRKY49OJBAZvJhRM=s75-c"
+        style="border-radius:50%; width:50px; height:50px;">
+        <p><strong>Raul:</strong> Putz, sinto muito por isso. Se precisar de alguma coisa, estou aqui para ajudar.</p>
+    `;
+
+    document.querySelector('.box').appendChild(mensagemProfessor);
+
+    // 3. Remover os botões (simulando que a mensagem foi enviada)
+    document.querySelector('.mensagemAluno').remove();
+}
+</script>
+
+</body>
+</html>
